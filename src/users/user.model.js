@@ -35,7 +35,7 @@ export const User = db.define("users", {
 
     role: {
         type: DataTypes.STRING,
-        defaultValue: "CLIENT"
+        defaultValue: "USER"
     },
 
     isActive: {
