@@ -3,9 +3,6 @@ import {
     getRatings,
     getAverageRatingByReport
 } from "./rating.controller.js";
-import { 
-    validateGetAverageRatingByReport 
-} from "../../middlewares/rating-validators.js";
 
 const router = Router();
 
@@ -13,6 +10,6 @@ const router = Router();
 router.get("/", getRatings);
 
 // Obtener promedio con validación de query param
-router.get("/averageByReport", validateGetAverageRatingByReport, getAverageRatingByReport);
+router.get("/averageByReport", getAverageRatingByReport);
 
 export default router;

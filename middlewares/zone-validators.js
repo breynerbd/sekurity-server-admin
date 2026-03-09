@@ -1,5 +1,5 @@
 import { param, body } from "express-validator";
-import { validateFields } from "./check-validators.js";
+import { checkValidators } from "./check-validators.js";
 
 export const validateCreateZone = [
     body('name')
@@ -12,7 +12,7 @@ export const validateCreateZone = [
         .isString().withMessage('La descripción debe ser una cadena de texto')
         .trim()
         .isLength({ max: 255 }).withMessage('La descripción no puede exceder los 255 caracteres'),
-    validateFields
+    checkValidators
 ];
 
 export const validateUpdateZone = [
@@ -27,12 +27,12 @@ export const validateUpdateZone = [
         .optional()
         .isString().withMessage('La descripción debe ser una cadena de texto')
         .trim(),
-    validateFields
+    checkValidators
 ];
 
 export const validateDeleteZone = [
     param('id')
         .isInt().withMessage('El ID de la zona debe ser un número entero')
         .notEmpty().withMessage('El ID es obligatorio'),
-    validateFields
+    checkValidators
 ];

@@ -1,11 +1,11 @@
 import { param, body } from "express-validator";
-import { validateFields } from "./check-validators.js";
+import { checkValidators } from "./check-validators.js";
 
 export const validateGetReportById = [
     param('id')
         .isInt().withMessage('El ID del reporte debe ser un número entero')
         .notEmpty().withMessage('El ID es obligatorio'),
-    validateFields
+    checkValidators
 ];
 
 export const validateUpdateReportStatus = [
@@ -17,14 +17,14 @@ export const validateUpdateReportStatus = [
         .toUpperCase()
         .isIn(['ACTIVE', 'RESOLVED', 'PENDING', 'CANCELLED'])
         .withMessage('El estado debe ser uno de los siguientes: ACTIVE, RESOLVED, PENDING, CANCELLED'),
-    validateFields
+    checkValidators
 ];
 
 export const validateDeleteReport = [
     param('id')
         .isInt().withMessage('El ID del reporte debe ser un número entero')
         .notEmpty().withMessage('El ID es obligatorio'),
-    validateFields
+    checkValidators
 ];
 
 export const validateCreateReport = [
@@ -42,5 +42,5 @@ export const validateCreateReport = [
         .isInt().withMessage('ID de usuario inválido'),
     body('zone_id')
         .isInt().withMessage('ID de zona inválido'),
-    validateFields
+    checkValidators
 ];
