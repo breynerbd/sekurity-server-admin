@@ -6,7 +6,7 @@ const corsOptions = {
     //Establece los metodos permitidos en la API
     methods: "GET, POST, PUT, DELETE",
     //Define los headers que el cliente puede enviar
-    allowedHeaders: "Content-Type,Authotization"
+    allowedHeaders: "Content-Type,Authorization"
 }
 
 export { corsOptions }
