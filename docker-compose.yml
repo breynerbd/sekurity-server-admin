@@ -16,19 +16,6 @@ services:
       timeout: 5s
       retries: 5
 
-  app-admin:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: sekurity-admin
-    ports:
-      - "3005:3005"
-    depends_on:
-      db:
-        condition: service_healthy
-    env_file:
-      - ./.env
-
   app-user:
     build:
       context: ../sekurity-server-user
@@ -41,6 +28,21 @@ services:
         condition: service_healthy
     env_file:
       - ../sekurity-server-user/.env
+
+  app-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sekurity-admin
+    ports:
+      - "3005:3005"
+    depends_on:
+      db:
+        condition: service_healthy
+      app-user:
+        condition: service_started  
+    env_file:
+      - ./.env
 
 volumes:
   postgres_data:
