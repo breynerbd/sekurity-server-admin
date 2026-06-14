@@ -8,16 +8,15 @@ import {
     validateGetUserById, 
     validateDeactivateUser 
 } from "../../middlewares/user-validators.js"; 
+import { authenticateUser } from "../../middlewares/authenticateUser.js";
 
 const router = Router();
 
-// Sin validación (a menos que añadas paginación)
-router.get("/", getUsers);
+// Todas las rutas quedan protegidas bajo autenticación de token JWT
+router.get("/", authenticateUser, getUsers);
 
-// Con validación de ID en el parámetro
-router.get("/:id", validateGetUserById, getUserById);
+router.get("/:id", authenticateUser, validateGetUserById, getUserById);
 
-// Con validación de ID para desactivar
-router.patch("/:id/deactivate", validateDeactivateUser, deactivateUser);
+router.patch("/:id/deactivate", authenticateUser, validateDeactivateUser, deactivateUser);
 
 export default router;
