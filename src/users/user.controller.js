@@ -106,3 +106,40 @@ export const deactivateUser = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
+//activate user
+export const activateUser = async (req, res) => {
+  try {
+    const currentUserRole = req.user?.role;
+    const currentUserId = req.user?.id;
+    const { id } = req.params;
+
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "Usuario no encontrado" });
+    }
+
+    // Restricción: No puedes desactivar tu propia cuenta administrativa
+    if (user.auth_id === currentUserId || user.id === currentUserId) {
+      return res.status(400).json({ success: false, message: "No puedes activarte a ti mismo." });
+    }
+
+    // Restricciones para el rol ADMIN
+    if (currentUserRole === "ADMIN" && (user.role === "ADMIN" || user.role === "MASTER_ADMIN")) {
+      return res.status(403).json({ success: false, message: "No tienes permisos para activar administradores." });
+    }
+
+    // Restricciones para MASTER_ADMIN (evita guerras de privilegios entre superusuarios)
+    if (currentUserRole === "MASTER_ADMIN" && user.role === "MASTER_ADMIN") {
+      return res.status(403).json({ success: false, message: "No puedes activar a otro MASTER_ADMIN." });
+    }
+
+    await user.update({ isActive: true });
+
+    return res.json({ success: true, message: "Usuario activado correctamente", user });
+  } catch (error) {
+    console.error("❌ Error en deactivateUser:", error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};

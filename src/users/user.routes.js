@@ -2,12 +2,13 @@ import { Router } from "express";
 import {
     getUsers,
     getUserById,
-    deactivateUser
+    deactivateUser,
+    activateUser
 } from "./user.controller.js";
-import { 
-    validateGetUserById, 
-    validateDeactivateUser 
-} from "../../middlewares/user-validators.js"; 
+import {
+    validateGetUserById,
+    validateDeactivateUser
+} from "../../middlewares/user-validators.js";
 import { authenticateUser } from "../../middlewares/authenticateUser.js";
 
 const router = Router();
@@ -18,5 +19,7 @@ router.get("/", authenticateUser, getUsers);
 router.get("/:id", authenticateUser, validateGetUserById, getUserById);
 
 router.patch("/:id/deactivate", authenticateUser, validateDeactivateUser, deactivateUser);
+
+router.patch("/:id/activate", authenticateUser, validateDeactivateUser, activateUser);
 
 export default router;
