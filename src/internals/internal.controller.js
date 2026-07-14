@@ -3,44 +3,57 @@ import { User } from "../users/user.model.js";
 export const syncUserFromAuth = async (req, res) => {
     try {
 
-        const { auth_id, nombre, apellido, correo, telefono } = req.body;
+        console.log("BODY RECIBIDO:");
+        console.log(req.body);
 
-        if (!auth_id) {
-            return res.status(400).json({
-                success: false,
-                message: "auth_id es requerido"
-            });
-        }
+        const {
+            auth_id,
+            name,
+            surname,
+            username,
+            email,
+            password,
+            phone,
+            status
+        } = req.body;
+
 
         let user = await User.findOne({
-            where: { auth_id }
+            where: {
+                auth_id
+            }
         });
 
+
         if (!user) {
+
             user = await User.create({
                 auth_id,
-                nombre: nombre ?? "PENDIENTE",
-                apellido: apellido ?? "PENDIENTE",
-                correo: correo,
-                dpi: "PENDIENTE",
-                telefono: telefono ?? "PENDIENTE",
-                direccion: "PENDIENTE",
-                ingresos_mensuales: 0,
-                role_id: 2
+                name,
+                surname,
+                username,
+                email,
+                password,
+                phone,
+                status,
+                role: "USER"
             });
         }
+
 
         return res.status(200).json({
             success: true,
             user
         });
 
+
     } catch (error) {
+
+        console.log(error);
 
         return res.status(500).json({
             success: false,
-            message: error.message
+            error: error.message
         });
-
     }
 };

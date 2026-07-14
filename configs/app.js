@@ -20,6 +20,7 @@ const BASE_URL = "/sekurity/v1";
 export const initServer = () => {
 
     const app = express();
+
     app.use(express.json());
 
     app.use(cors(corsOptions));
@@ -37,12 +38,14 @@ export const initServer = () => {
     app.use(`${BASE_URL}/ratings`, ratingRouter);
     app.use(`${BASE_URL}/internals`, internalRouter);
 
+
     app.get(`${BASE_URL}/health`, (req, res) => {
         res.status(200).json({
             success: true,
             message: "Sekurity API running correctly"
         });
     });
+
 
     app.use(errorHandler);
 

@@ -19,12 +19,12 @@ export const db = new Sequelize(
 export const dbConnection = async () => {
     try {
         await db.authenticate();
-        console.log("✅ PostgreSQL | Connection successful.");
+        console.log("PostgreSQL | Connection successful.");
 
         await db.sync({ alter: true });
-        console.log("✅ PostgreSQL | Database synchronized.");
+        console.log("PostgreSQL | Database synchronized.");
     } catch (error) {
-        console.error("❌ PostgreSQL | Connection failed:", error.message);
+        console.error("PostgreSQL | Connection failed:", error.message);
         process.exit(1);
     }
 };

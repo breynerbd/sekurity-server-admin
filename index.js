@@ -15,11 +15,11 @@ const startServer = async () => {
         const app = initServer();
 
         app.listen(PORT, () => {
-            console.log(`🚀 Sekurity ADMIN API running at http://localhost:${PORT}/sekurity/v1`);
+            console.log(`Sekurity ADMIN API running at http://localhost:${PORT}/sekurity/v1`);
         });
 
     } catch (error) {
-        console.error("❌ Error starting ADMIN server:", error);
+        console.error("Error starting ADMIN server:", error);
         process.exit(1);
     }
 };

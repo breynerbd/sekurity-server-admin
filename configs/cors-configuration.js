@@ -4,7 +4,7 @@ const corsOptions = {
     //Permite que la API acceda a la API
     credentials: true,
     //Establece los metodos permitidos en la API
-    methods: "GET, POST, PUT, DELETE",
+    methods: "GET, POST, PUT, DELETE, PATCH, OPTIONS",
     //Define los headers que el cliente puede enviar
     allowedHeaders: "Content-Type,Authorization"
 }
