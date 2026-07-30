@@ -15,8 +15,8 @@ export const validateUpdateReportStatus = [
         .notEmpty().withMessage('El nuevo estado es obligatorio')
         .isString().withMessage('El estado debe ser una cadena de texto')
         .toUpperCase()
-        .isIn(['ACTIVE', 'RESOLVED', 'PENDING', 'CANCELLED'])
-        .withMessage('El estado debe ser uno de los siguientes: ACTIVE, RESOLVED, PENDING, CANCELLED'),
+        .isIn(['ACTIVE', 'IN_PROGRESS', 'RESOLVED', 'PENDING', 'CANCELLED'])
+        .withMessage('El estado debe ser uno de los siguientes: ACTIVE, RESOLVED, IN_PROGRESS, PENDING, CANCELLED'),
     checkValidators
 ];
 

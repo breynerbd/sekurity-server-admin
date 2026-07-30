@@ -24,11 +24,17 @@ export const Report = db.define("reports", {
 
     severity_level: {
         type: DataTypes.STRING,
+        validate: {
+            isIn: [["LOW", "MEDIUM", "HIGH"]]
+        },
         defaultValue: "MEDIUM"
     },
 
     status: {
         type: DataTypes.STRING,
+        validate: {
+            isIn: [["ACTIVE", "IN_PROGRESS", "RESOLVED", "CANCELLED"]]
+        },
         defaultValue: "ACTIVE"
     },
 
