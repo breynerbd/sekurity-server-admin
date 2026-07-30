@@ -13,6 +13,12 @@ export const db = new Sequelize(
         port: process.env.DB_PORT,
         dialect: "postgres",
         logging: false,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
     }
 );
 
@@ -28,4 +34,3 @@ export const dbConnection = async () => {
         process.exit(1);
     }
 };
-
