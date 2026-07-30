@@ -1,6 +1,6 @@
 const corsOptions = {
     //Permite que cualquier origen acceda a la API
-    orgin: true,
+    origin: true,
     //Permite que la API acceda a la API
     credentials: true,
     //Establece los metodos permitidos en la API
